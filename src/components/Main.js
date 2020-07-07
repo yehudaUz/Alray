@@ -1,12 +1,14 @@
 import React from 'react';
-import TopMenu from '../components/TopMenu'
-import Ads from '../components/Ads'
+import Header from './Header'
+import MainApp from './MainApp'
+import Footer from './Footer'
 
 const Main = () => {
     return (
         <>
-            <TopMenu />
-            <Ads />
+        <Header/>
+        <MainApp/>
+        <Footer/>
         </>
     )
 }

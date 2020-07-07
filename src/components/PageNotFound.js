@@ -1,6 +1,5 @@
 import React from 'react';
-import TopMenu from '../components/TopMenu'
-
+import Header from './Header'
 const Video = () => {
     const path = "https://thumbs.gfycat.com/WateryAdorableCrow-mobile.mp4"
     return (
@@ -13,7 +12,7 @@ const Video = () => {
 const PageNotFound = () => {
     return (
         <>
-            <TopMenu />
+            <Header />
             <Video />
         </>
     )

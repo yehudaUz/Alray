@@ -1,4 +1,6 @@
 import '../style/style.css'
+import '../style/header.css'
+import '../style/mainApp.css'
 import React from 'react'
 import { Provider } from 'react-redux'
 import Store from '../store/store'
