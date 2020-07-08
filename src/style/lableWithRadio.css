@@ -1,0 +1,16 @@
+.radio-label {
+    /* display: inline-block; */
+    /* direction: rtl; */
+}
+
+.radio-label input {
+    /* vertical-align: super; */
+}
+
+.MuiRating-readOnly {
+    direction: rtl;
+}
+
+.MuiFormGroup-root {
+    margin: 1rem;
+}
