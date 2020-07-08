@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import RatingFilter from './RatingFilter'
-
+import PriceSlider from './PriceSlider'
+import HostingBase from './HostingBase'
+import SearchInput from './SearchInput'
 const MainApp = (props) => {
     return (
         <div className="mainApp-wrapper">
@@ -11,7 +13,12 @@ const MainApp = (props) => {
                         <label>סינון תוצאות</label>
                     </div>
                     <RatingFilter />
+                    <PriceSlider/>
+                    <HostingBase/>
+                    <SearchInput/>
                 </div>
+
+
                 <div className="mainApp-sortAndResult">
                     <div className="mainApp-sort">
 
