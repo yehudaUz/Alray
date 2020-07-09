@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
 }
+
 .mainApp-centerize-wrapper {
     width: 100%;
     /* height: 100%; */
     max-width: 1000px;
     display: flex;
     align-self: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .mainApp-filter-wrapper {
@@ -23,13 +24,31 @@
     border-radius: 5px;
 }
 
+.mainApp-sort {
+    display: flex;
+    justify-content: space-between;
+    /* position: relative; */
+}
+
 .mainApp-filter-header {
     /* margin-right: 10%; */
     margin: 1rem;
 }
 
+.mainApp-result {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mainApp-result-header {
+    color: #0091e2;
+    /* margin-bottom: 0; */
+    font-weight: 600;
+}
+
 .mainApp-sortAndResult {
-    color: red;
+    padding: 1rem;
     width: 75%;
 }
 
@@ -39,5 +58,10 @@
 
 .ratingFilter-header {
     margin: 1rem;
-    
+}
+.mainApp-vertical-line {
+    border-right: 2px grey solid;
+    align-self: center;
+    min-height: 2rem;
+    opacity: 0.35;
 }

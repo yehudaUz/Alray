@@ -1,0 +1,42 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import { purple, grey } from '@material-ui/core/colors';
+import {  withStyles, makeStyles } from '@material-ui/core/styles';
+
+const ColorButton = withStyles((theme) => ({
+    root: {
+        color: theme.palette.getContrastText(grey[200]),
+        backgroundColor: purple[0],
+        '&:hover': {
+            backgroundColor: "#313685",
+        },
+    },
+}))(Button);
+
+const useStyles = makeStyles((theme) => ({
+    margin: {
+        // margin: theme.spacing(4),
+    },
+}));
+
+const IconLabelButtons = (props) => {
+    const classes = useStyles();
+    return (
+            <ColorButton variant="text" color="primary" className={classes.margin}
+                // variant="contained"
+                // color={props.color}
+                // className={classes.button}
+                endIcon={props.icon ? <props.icon /> : ""}
+            >
+                {props.text}
+                {props.paper ? props.paper : ""}
+            </ColorButton>
+    );
+}
+
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(IconLabelButtons);

@@ -1,0 +1,19 @@
+.paper {
+    position: absolute;
+    top: 1.25em;
+    right: 0px;
+}
+
+.paper ul {
+    list-style-type: none;
+}
+
+.paper ul li {
+    min-width: max-content;
+}
+
+.makeStyles-root-3 > * {
+    height: unset!important;
+    /* width: unset!important; */
+    min-width: fit-content!important;
+}

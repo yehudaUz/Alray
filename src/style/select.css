@@ -1,0 +1,14 @@
+.select {
+    display: flex;
+    flex-direction: row;
+}
+.select-sortBy-label {
+    color:black;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+.select-form {
+    display: flex;
+    flex-direction: column;
+}

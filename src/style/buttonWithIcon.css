@@ -1,0 +1,8 @@
+.MuiButton-label {
+    padding: 0 1rem 0 1rem;
+    color: darkslategrey;
+    font-size: 1rem;
+}
+.MuiButton-label:hover {
+    color: white;
+}
