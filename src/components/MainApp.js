@@ -22,7 +22,7 @@ const MainApp = (props) => {
                         {/* <ButtonWithIcon text="מיין לפי" paper={<Paper />} /> */}
                         <Select/>
                         <span className="mainApp-vertical-line">|</span>
-                        <ButtonWithIcon text="הכי משתלם" icon={CreditCardIcon} />
+                        <ButtonWithIcon text="הכי משתלם" icon={CreditCardIcon} sortBy="lowToHigh" />
                         <ButtonWithIcon text="הכי פופולרי" icon={trophyIcon} />
                         <ButtonWithIcon text="הכי זול" icon={AttachMoneyIcon} />
                     </div>

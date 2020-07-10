@@ -6,3 +6,15 @@
 .priceSlider-header {
 margin-top: 1rem;
 }
+
+.priceSlider-priceRange-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.priceSlider-priceRange-minPrice-label, .priceSlider-priceRange-maxPrice-label{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,27 +1,30 @@
-// import { makersAndModels, areas } from '../other/textData'
+import { act } from "react-dom/test-utils";
 
-// const initialCarSearchParams = {
-//     maker: [], model: [], fromYear: "", toYear: "", fromPrice: "", toPrice: "", area: [],
-//     fromKm: "", toKm: "", fromHand: "", toHand: "", color: "", ownership: "", engineCcFrom: "",
-//     engineCcTo: "", engineType: "", transmitionType: "", freeText: "", withPrice: false, withPhoto: false
-// }
-
+const initialSearchParams = {
+    rating: [true, true, true, true, true],
+    price: { from: 800, to: 6000 },
+    conditions: { sleep: true, breakfast: true },
+    sortBy: {
+        price: { highToLow: false, lowToHigh: true },
+        rating: { fromHighToLow: false, fromLowToHigh: false }, worthwhile: false
+    }
+}
 
 const getLocalStorageOrSetDefault = () => {
     // localStorage.clear()
-    if (localStorage.getItem('state')) {
-        // console.log("parse", localStorage.getItem('state'))
-        let tempState = JSON.parse(localStorage.getItem('state'))
-        // tempState.carSearchParams = {}//initialCarSearchParams
-        return tempState //JSON.parse(localStorage.getItem('state'))
-    }
+    // if (localStorage.getItem('state')) {
+    // console.log("parse", localStorage.getItem('state'))
+    // let tempState = JSON.parse(localStorage.getItem('state'))
+    // tempState.carSearchParams = {}//initialCarSearchParams
+    // return tempState //JSON.parse(localStorage.getItem('state'))
+    // }
     // UpdateInitialSearchResult.default()
     // UpdateInitialSearchResult.default.WrappedComponent()
     const state = {
-        currency: "$USD"
+        currency: "$USD",
         // adsPath: "/yad2Ad.png",
         // menuText: ["ראשי"],
-        // carSearchParams: initialCarSearchParams,
+        searchParams: initialSearchParams,
         // carSearchFiltersUpdated: false,
         // sortBy: "",
         // searchResult: [],
@@ -36,6 +39,18 @@ export default (state = initialState, action) => {
     // console.log("action: " + JSON.stringify(action) + "   state: " + JSON.stringify(state))
     let newState
     switch (action.type) {
+        case 'RATING_UPDATE':
+            newState = { ...state, searchParams: { ...state.searchParams, rating: action.rating } }
+            localStorage.setItem('state', JSON.stringify(newState));
+            return newState
+        case 'SLIDER_UPDATE':
+            newState = { ...state, searchParams: { ...state.searchParams, price: { from: action.sliderValue[0], to: action.sliderValue[1] } } }
+            localStorage.setItem('state', JSON.stringify(newState));
+            return newState
+        case 'UPDATE_CONDITIONS':
+            newState = { ...state, searchParams: { ...state.searchParams, conditions: action.newConditions } }
+            localStorage.setItem('state', JSON.stringify(newState));
+            return newState
         // case 'UPDATE_ADS':
         //     newState = { ...state, adsPath: action.adsPath }
         //     localStorage.setItem('state', JSON.stringify(newState));

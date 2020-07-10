@@ -23,15 +23,15 @@ const RatingFilter = (props) => {
                 <LabelWithRadio isChecked={true} value={"5star"} className={"radio 5star"} labelText={<Rating defaultValue={5} readOnly />} />
             </div> */}
             <RadioGroup defaultValue="start">
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio radioRating="0" />}
                     label={<Rating defaultValue={1} readOnly />} />
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio radioRating="1" />}
                     label={<Rating defaultValue={2} readOnly />} />
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio radioRating="2" />}
                     label={<Rating defaultValue={3} readOnly />} />
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio radioRating="3" />}
                     label={<Rating defaultValue={4} readOnly />} />
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio radioRating="4" />}
                     label={<Rating defaultValue={5} readOnly />} />
             </RadioGroup>
         </div>

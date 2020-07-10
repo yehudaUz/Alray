@@ -14,9 +14,9 @@ const HostingBase = (props) => {
                 <label>בסיס אירוח</label>
             </div>
             <RadioGroup defaultValue="start">
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio condition="sleep" />}
                     label={"לינה"} />
-                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio />}
+                <FormControlLabel labelPlacement="start" value="start" control={<WhiteRadio condition="breakfast" />}
                     label={"ארוחת בוקר"} />
             </RadioGroup>
         </div>

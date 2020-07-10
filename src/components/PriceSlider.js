@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import {updateSliderValues} from '../actions/actions'
 
 const useStyles = makeStyles({
     root: {
@@ -30,26 +31,28 @@ function valuetext(value) {
 
 const PriceSlider = (props) => {
     const classes = useStyles();
-    const [value, setValue] = React.useState([0, 6000]);
+    // const [value, setValue] = React.useState([0, 6000]);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        console.log(newValue)
+        props.dispatch(updateSliderValues(newValue))
+        // setValue(newValue);
     };
 
     return (
         <div className="priceSlider">
             <div className="priceSlider-header">
                 <label>טווח מחירים לאדם</label>
+                <div className="priceSlider-priceRange-wrapper">
+                    <label className="priceSlider-priceRange-minPrice-label">{props.searchParams.price.from}</label>
+                    <label className="priceSlider-priceRange-maxPrice-label">{props.searchParams.price.to}</label>
+                </div>
             </div>
             <div className={classes.root}>
-                {/* <Typography id="range-slider" gutterBottom>
-                    Temperature range
-        </Typography> */}
                 <MySlider
-                    // valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20}
-                    min={890}
-                    max={6000}
-                    value={value}
+                    min={0}
+                    max={9999}
+                    value={[props.searchParams.price.from, props.searchParams.price.to]}
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     aria-labelledby="range-slider"

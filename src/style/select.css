@@ -1,6 +1,8 @@
 .select {
     display: flex;
     flex-direction: row;
+    /* bottom:0px!important; */
+
 }
 .select-sortBy-label {
     color:black;

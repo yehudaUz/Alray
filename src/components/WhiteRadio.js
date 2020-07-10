@@ -2,13 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux';
 import Radio from '@material-ui/core/Radio';
 import { withStyles } from '@material-ui/core/styles';
+import { updateRatingValue } from '../actions/actions'
+import { updateConditions } from '../actions/actions'
 
 const WhiteRadio = (props) => {
-    const [isClicked, setClick] = React.useState(true);
-
     const handleChange = (e) => {
-        e.target.checked ? setClick(false) : setClick(true)
-        console.log(isClicked)
+        // console.log(e.target.checked)
+        // console.log(props)
+        if (props.radioRating) {
+            let newRadioArr = [...props.searchParams.rating]
+            newRadioArr[props.radioRating] = !newRadioArr[props.radioRating]
+            props.dispatch(updateRatingValue(newRadioArr))
+        } else {
+            let newCondiotions = { ...props.searchParams.conditions }
+            newCondiotions[props.condition] = !newCondiotions[props.condition]
+            props.dispatch(updateConditions(newCondiotions))
+        }
     }
 
     const RadioComp = withStyles({
@@ -18,17 +27,13 @@ const WhiteRadio = (props) => {
                 color: "white",
             },
         },
-        // checked: {},
     })((props) => <Radio color="default" {...props} />);
-
-
-
 
     return (
         <RadioComp
             onClick={handleChange}
-            value={isClicked}
-            checked={isClicked}
+            value={props.radioRating ? props.searchParams.rating[props.radioRating] : props.searchParams.conditions[props.condition]}
+            checked={props.radioRating ? props.searchParams.rating[props.radioRating] : props.searchParams.conditions[props.condition]}
         />
     )
 }
