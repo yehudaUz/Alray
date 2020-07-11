@@ -2,12 +2,14 @@ import { act } from "react-dom/test-utils";
 
 const initialSearchParams = {
     rating: [true, true, true, true, true],
-    price: { from: 800, to: 6000 },
+    fromPrice: 800, toPrice: 6000,
     conditions: { sleep: true, breakfast: true },
-    sortBy: {
-        price: { highToLow: false, lowToHigh: true },
-        rating: { fromHighToLow: false, fromLowToHigh: false }, worthwhile: false
-    }
+    // sortBy: {
+    //     price: { highToLow: false, lowToHigh: true },
+    //     rating: { highToLow: false, lowToHigh: false },
+    //     worthwhile: false
+    // }
+    sortBy: ""
 }
 
 const getLocalStorageOrSetDefault = () => {
@@ -25,6 +27,8 @@ const getLocalStorageOrSetDefault = () => {
         // adsPath: "/yad2Ad.png",
         // menuText: ["ראשי"],
         searchParams: initialSearchParams,
+        searchResult: [],
+        filtersUpdated: true
         // carSearchFiltersUpdated: false,
         // sortBy: "",
         // searchResult: [],
@@ -51,6 +55,14 @@ export default (state = initialState, action) => {
             newState = { ...state, searchParams: { ...state.searchParams, conditions: action.newConditions } }
             localStorage.setItem('state', JSON.stringify(newState));
             return newState
+        case 'FILTER_UPDATE':
+            newState = { ...state, filtersUpdated: action.isFilterUpdate }
+            localStorage.setItem('state', JSON.stringify(newState));
+            return newState
+        case 'UPDATE_PACKAGE_RESULT':
+            newState = { ...state, searchResult: action.searchResult }
+            localStorage.setItem('state', JSON.stringify(newState));
+            return newState
         // case 'UPDATE_ADS':
         //     newState = { ...state, adsPath: action.adsPath }
         //     localStorage.setItem('state', JSON.stringify(newState));
@@ -63,18 +75,11 @@ export default (state = initialState, action) => {
         //     newState = { ...state, carSearchParams: { ...state.carSearchParams, ...action.carSearchParams } }
         //     localStorage.setItem('state', JSON.stringify(newState));
         //     return newState
-        // case 'UPDATE_CAR_SEARCH_RESULT':
-        //     newState = { ...state, searchResult: action.searchResult }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
         // case 'UPDATE_USER':
         //     newState = { ...state, user: action.user }
         //     localStorage.setItem('state', JSON.stringify(newState));
         //     return newState
-        // case 'FILTER_UPDATE':
-        //     newState = { ...state, carSearchFiltersUpdated: action.isFilterUpdate }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
+
         // case 'SORT_BY':
         //     newState = { ...state, sortBy: action.sortBy }
         //     localStorage.setItem('state', JSON.stringify(newState));

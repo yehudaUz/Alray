@@ -6,7 +6,7 @@ const app = express();
 
 require('../database/mongoose')
 const userRouter = require('../database/models/user')
-const carAdvertisementRouter = require('../database/models/carAdvertisment')
+const holidayPackageRouter = require('../database/models/holidayPackage')
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 const router = require('../server/routers')
 app.use('/', router)
 app.use(userRouter)
-app.use(carAdvertisementRouter)
+app.use(holidayPackageRouter)
 
 
 app.get('/', function (req, res) {

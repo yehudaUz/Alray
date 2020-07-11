@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const holidayPackageSchema = new mongoose.Schema({
+const packageSchema = new mongoose.Schema({
     hotelName: {
         type: String,
         trim: true
@@ -43,6 +43,6 @@ const holidayPackageSchema = new mongoose.Schema({
 // console.log("FFFFFFFFFFFFFFFFFFFFF",Advertisement.discriminator)
 // const CarAdvertisement = Advertisement.discriminator("CarAdvertisement", carAdvertisementSchema)
 
-const HolidayPackage = mongoose.model('HolidayPackage', holidayPackageSchema)
+const Package = mongoose.model('package', packageSchema)
 
-module.exports = HolidayPackage
+module.exports = Package

@@ -44,15 +44,15 @@ const PriceSlider = (props) => {
             <div className="priceSlider-header">
                 <label>טווח מחירים לאדם</label>
                 <div className="priceSlider-priceRange-wrapper">
-                    <label className="priceSlider-priceRange-minPrice-label">{props.searchParams.price.from}</label>
-                    <label className="priceSlider-priceRange-maxPrice-label">{props.searchParams.price.to}</label>
+                    <label className="priceSlider-priceRange-minPrice-label">{props.searchParams.fromPrice}</label>
+                    <label className="priceSlider-priceRange-maxPrice-label">{props.searchParams.toPrice}</label>
                 </div>
             </div>
             <div className={classes.root}>
                 <MySlider
                     min={0}
                     max={9999}
-                    value={[props.searchParams.price.from, props.searchParams.price.to]}
+                    value={[props.searchParams.fromPrice, props.searchParams.toPrice]}
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     aria-labelledby="range-slider"

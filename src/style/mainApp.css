@@ -45,6 +45,7 @@
     color: #0091e2;
     /* margin-bottom: 0; */
     font-weight: 600;
+    text-align: end;
 }
 
 .mainApp-sortAndResult {
@@ -64,4 +65,32 @@
     align-self: center;
     min-height: 2rem;
     opacity: 0.35;
+}
+
+.mainApp-result-wrapper {
+    color:black;
+}
+
+.mainApp-result-table {
+    display: flex;
+    flex-direction: row;
+}
+
+.mainApp-result-table-rightPart {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainApp-result-image {
+    
+}
+
+.mainApp-reuslt-table-MainPart {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainApp-result-table-leftPart {
+    display: flex;
+    flex-direction: column;
 }

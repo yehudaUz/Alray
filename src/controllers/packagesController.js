@@ -4,7 +4,7 @@ require('../database/mongoose')
 const multer = require('multer')
 const User = require('../database/models/user')
 const auth = require('../database/middleware/auth')
-const carAd = require('../database/models/carAdvertisment')
+const holidayPack = require('../database/models/holidayPackage')
 const router = new express.Router()
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
@@ -61,8 +61,8 @@ const uploadAsync = (req, res) => {
     });
 }
 
-module.exports.carSearchInitial = async (req, res) => {
-    carAd.find({}, (err, records) => {
+module.exports.packageSearchInitial = async (req, res) => {
+    holidayPack.find({}, (err, records) => {
         if (err) {
             console.log("errr", err, records)
             return res.status(500).send({ body: "Sorry, internal error when searched for document in database" })
@@ -86,7 +86,7 @@ module.exports.postNewAd = async (req, res) => {
     try {
         uploadAsync(req, res).then(async () => {
             console.log("after upload [hoto successs")
-            const ad = new carAd(req.body)
+            const ad = new holidayPack(req.body)
             console.log(ad)
             const userId = req.user._id
             ad.userId = userId
@@ -117,9 +117,9 @@ module.exports.postNewAd = async (req, res) => {
     }
 }
 
-module.exports.carSearch = async (req, res) => {
-    // console.log("RRRRRRRRRRRRRRRR", req.body)
-    let mongooseSearchObj = req.body.carSearchParams || {}
+module.exports.packageSearch = async (req, res) => {
+    console.log("RRRRRRRRRRRRRRRR", req.body)
+    let mongooseSearchObj = req.body.packageSearchParams || {}
     Object.entries(mongooseSearchObj).forEach(keyValue => {
         if (keyValue[1] === "" || keyValue[1] === [] || keyValue[1] === undefined)
             delete mongooseSearchObj[keyValue[0]]
@@ -136,63 +136,85 @@ module.exports.carSearch = async (req, res) => {
     }
     delete mongooseSearchObj["fromPrice"]; delete mongooseSearchObj["toPrice"]
 
-    if (mongooseSearchObj.fromYear)
-        mongooseSearchObj.year = { "$gte": mongooseSearchObj["fromYear"] }
-    if (mongooseSearchObj.toYear) {
-        if (!mongooseSearchObj.year)
-            mongooseSearchObj.year = { "$lte": mongooseSearchObj["toYear"] }
-        else
-            mongooseSearchObj.year = { "$gte": mongooseSearchObj["fromYear"], "$lte": mongooseSearchObj["toYear"] }
+    if (mongooseSearchObj.conditions) {
+        mongooseSearchObj = { ...mongooseSearchObj, ...mongooseSearchObj.conditions }
+        delete mongooseSearchObj["conditions"]
     }
-    delete mongooseSearchObj["fromYear"]; delete mongooseSearchObj["toYear"]
 
-    if (mongooseSearchObj.withPrice && mongooseSearchObj["withPrice"])
-        if (!mongooseSearchObj.price)
-            mongooseSearchObj.price = { $ne: null }
+    let ratingArr = []
+    for (let i = 0; i < mongooseSearchObj.rating.length; i++)
+        ratingArr.push(i+1)
+    mongooseSearchObj.rating = { "$in": ratingArr }
 
-    delete mongooseSearchObj["withPrice"];
+    // if (mongooseSearchObj.fromYear)
+    //     mongooseSearchObj.year = { "$gte": mongooseSearchObj["fromYear"] }
+    // if (mongooseSearchObj.toYear) {
+    //     if (!mongooseSearchObj.year)
+    //         mongooseSearchObj.year = { "$lte": mongooseSearchObj["toYear"] }
+    //     else
+    //         mongooseSearchObj.year = { "$gte": mongooseSearchObj["fromYear"], "$lte": mongooseSearchObj["toYear"] }
+    // }
+    // delete mongooseSearchObj["fromYear"]; delete mongooseSearchObj["toYear"]
+
+    // if (mongooseSearchObj.withPrice && mongooseSearchObj["withPrice"])
+    //     if (!mongooseSearchObj.price)
+    //         mongooseSearchObj.price = { $ne: null }
+
+    // delete mongooseSearchObj["withPrice"];
 
 
-    if (mongooseSearchObj.withPhoto && mongooseSearchObj["withPhoto"]) {
-        mongooseSearchObj["imgsLinks.0"] = { "$exists": true }
-    }
-    delete mongooseSearchObj["withPhoto"];
+    // if (mongooseSearchObj.withPhoto && mongooseSearchObj["withPhoto"]) {
+    //     mongooseSearchObj["imgsLinks.0"] = { "$exists": true }
+    // }
+    // delete mongooseSearchObj["withPhoto"];
 
-    console.log("Aaa")
     Object.entries(mongooseSearchObj).map(keyValue => {
         if (keyValue[0] && Array.isArray(keyValue[1]) && keyValue[1].length === 0)
             delete mongooseSearchObj[keyValue[0]]
     })
 
-    let sortBy = req.body.sortBy ? req.body.sortBy : undefined
+    console.log("Aaa", mongooseSearchObj)
+
+
+    let sortBy = req.body.sortBy ? req.body.sortBy : "priceLowToHigh"
     if (sortBy && sortBy !== undefined && sortBy !== "" && sortBy != null) {
         switch (sortBy) {
-            case "byDate":
-                sortBy = "-updatedAt"
-                break;
-            case "byPriceLowToHigh":
+            // case "byDate":
+            //     sortBy = "-updatedAt"
+            //     break;
+            case "priceLowToHigh":
                 sortBy = "price"
                 break;
-            case "ByPriceHighToLow":
+            case "priceHighToLow":
                 sortBy = "-price"
                 break;
-            case "byKmLowToHigh":
-                sortBy = "km"
+            case "ratingLowToHigh":
+                sortBy = "rating"
                 break;
-            case "byYearHighToLow":
-                sortBy = "-year"
+            case "ratingHighToLow":
+                sortBy = "-rating"
                 break;
+            // case "byKmLowToHigh":
+            //     sortBy = "km"
+            //     break;
+            // case "byYearHighToLow":
+            //     sortBy = "-year"
+            //     break;
             default:
                 console.log("UNKNOWN SORTBY OPTION!!!!!")
         }
     }
     console.log("sortBy", sortBy)
     console.log("mongooseSearchObj", mongooseSearchObj)
-    carAd.find(mongooseSearchObj, function (err, records) {
+    // holidayPack.find({}, (err, record) => {
+    //     console.log("err", err)
+    //     console.log("Records: ", record)
+    // })
+    holidayPack.find(mongooseSearchObj, function (err, records) {
         if (err)
             return res.status(500).send({ body: "Sorry, internal error when searched for document in database" })
     }).sort(sortBy).then((records) => {
-        console.log("in")
+        console.log("in", records)
         res.send({ "body": records })
     });
 }
