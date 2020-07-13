@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import Radio from '@material-ui/core/Radio';
 import { withStyles } from '@material-ui/core/styles';
-import { updateRatingValue } from '../actions/actions'
-import { updateConditions } from '../actions/actions'
+import { updateRatingValue, updateConditions, filterUpdated } from '../actions/actions'
 
 const WhiteRadio = (props) => {
     const handleChange = (e) => {
@@ -18,6 +17,7 @@ const WhiteRadio = (props) => {
             newCondiotions[props.condition] = !newCondiotions[props.condition]
             props.dispatch(updateConditions(newCondiotions))
         }
+        props.dispatch(filterUpdated(true))
     }
 
     const RadioComp = withStyles({

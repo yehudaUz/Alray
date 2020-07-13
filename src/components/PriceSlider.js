@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import {updateSliderValues} from '../actions/actions'
+import {updateSliderValues,filterUpdated} from '../actions/actions'
 
 const useStyles = makeStyles({
     root: {
@@ -36,6 +36,7 @@ const PriceSlider = (props) => {
     const handleChange = (event, newValue) => {
         console.log(newValue)
         props.dispatch(updateSliderValues(newValue))
+        props.dispatch(filterUpdated(true))
         // setValue(newValue);
     };
 

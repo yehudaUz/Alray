@@ -137,13 +137,21 @@ module.exports.packageSearch = async (req, res) => {
     delete mongooseSearchObj["fromPrice"]; delete mongooseSearchObj["toPrice"]
 
     if (mongooseSearchObj.conditions) {
-        mongooseSearchObj = { ...mongooseSearchObj, ...mongooseSearchObj.conditions }
-        delete mongooseSearchObj["conditions"]
+        let operator = "$or"
+        if (!(mongooseSearchObj.conditions.sleep || mongooseSearchObj.conditions.breakfast) ||
+            (mongooseSearchObj.conditions.sleep && !mongooseSearchObj.conditions.breakfast))
+            operator = "$and"
+        mongooseSearchObj = {
+            ...mongooseSearchObj, [operator]:
+                [{ sleep: mongooseSearchObj.conditions.sleep }, { breakfast: mongooseSearchObj.conditions.breakfast }]
+        }
     }
+    delete mongooseSearchObj["conditions"]
 
     let ratingArr = []
     for (let i = 0; i < mongooseSearchObj.rating.length; i++)
-        ratingArr.push(i+1)
+        if (mongooseSearchObj.rating[i])
+            ratingArr.push(i + 1)
     mongooseSearchObj.rating = { "$in": ratingArr }
 
     // if (mongooseSearchObj.fromYear)

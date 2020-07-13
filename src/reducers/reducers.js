@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
             localStorage.setItem('state', JSON.stringify(newState));
             return newState
         case 'SLIDER_UPDATE':
-            newState = { ...state, searchParams: { ...state.searchParams, price: { from: action.sliderValue[0], to: action.sliderValue[1] } } }
+            newState = { ...state, searchParams: { ...state.searchParams, fromPrice:action.sliderValue[0],toPrice:action.sliderValue[1]}}//price: { from: action.sliderValue[0], to: action.sliderValue[1] } } }
             localStorage.setItem('state', JSON.stringify(newState));
             return newState
         case 'UPDATE_CONDITIONS':

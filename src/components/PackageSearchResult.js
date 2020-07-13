@@ -5,19 +5,22 @@ import { filterUpdated } from '../actions/actions'
 import { Rating } from '@material-ui/lab';
 
 const sendSearchRequest = async (props, isSearchWithParams) => {
-    let urlPath = "http://localhost:3000/packageSearchInitial"
-    if (isSearchWithParams)
-        urlPath = "http://localhost:3000/packageSearch"
-    fetch(urlPath, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ packageSearchParams: props.searchParams, sortBy: props.sortBy })
-    }).then(response => response.json()).then(data => {
-        console.log(data)
-        props.dispatch(updatePackageSearchResult(data.body))
-        return (data.body)
-    }).catch((error) => {
-        console.log("ERROR: " + error)
+    return new Promise((resolve, reject) => {
+        let urlPath = "http://localhost:3000/packageSearchInitial"
+        if (isSearchWithParams)
+            urlPath = "http://localhost:3000/packageSearch"
+        fetch(urlPath, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ packageSearchParams: props.searchParams, sortBy: props.sortBy })
+        }).then(response => response.json()).then(data => {
+            console.log(data)
+            props.dispatch(updatePackageSearchResult(data.body))
+            resolve(data.body)
+        }).catch((error) => {
+            console.log("ERROR: " + error)
+            reject(error)
+        })
     })
 }
 
@@ -31,15 +34,13 @@ const daysBetween2Dates = (date1, date2) => {
 }
 
 const PackageSearchResult = (props) => {
-    if (props.filtersUpdated) {
-        sendSearchRequest(props, true)
-        props.dispatch(filterUpdated(false))
-    }
+    if (props.filtersUpdated) 
+        sendSearchRequest(props, true).then(() => props.dispatch(filterUpdated(false)))
 
     return (
         <div className="mainApp-result-wrapper">
             <div className="mainApp-result-header">
-                <label>סה"כ נמצאו {props.searchResult.lengh} תוצאות</label>
+                <label>סה"כ נמצאו {props.searchResult.length} תוצאות</label>
             </div>
             <div className="mainApp-result">
                 {props.searchResult.map(searchData => {
@@ -50,17 +51,25 @@ const PackageSearchResult = (props) => {
                             </div>
                             <div className="mainApp-result-table-MainPart">
                                 <label className="mainApp-result-name">{searchData.name}</label>
-                                <Rating defaultValue={searchData.rating} readOnly />
-                                <label className="mainApp-result-enterTime">{searchData.dateIn}</label>
-                                <label className="mainApp-result-exitTime">{searchData.dateOut}</label>
-                                <label className="mainApp-result-conditions">
-                                    {daysBetween2Dates(searchData.dateOut, searchData.dateIn) + " "}
+                                <Rating defaultValue={searchData.rating} readOnly className="mainApp-result-rating" />
+                                <div className="mainApp-result-enter">
+                                    <label className="mainApp-result-enterTime-header">כניסה:</label>
+                                    <label className="mainApp-result-enterTime-data">{searchData.dateIn}</label>
+                                </div>
+                                <div className="mainApp-result-exit">
+                                    <label className="mainApp-result-exitTime-header">יציאה:</label>
+                                    <label className="mainApp-result-exitTime">{searchData.dateOut}</label>
+                                </div>
+                                <div className="mainApp-result-conditions">
+                                    <label>
+                                        {daysBetween2Dates(searchData.dateOut, searchData.dateIn) + " "}
                                     לילות
                                     </label>
-                                <label className="mainApp-result-conditions">|
-                                {searchData.breakfast ? "ארוחת בוקר" : "חדר בלבד"}
-                                </label>
-
+                                    <span class="mainApp-vertical-line"></span>
+                                    <label className="mainApp-result-conditions">
+                                        {searchData.breakfast ? "ארוחת בוקר" : "חדר בלבד"}
+                                    </label>
+                                </div>
                             </div>
 
                             <div className="mainApp-result-table-rightPart">
