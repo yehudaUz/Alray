@@ -9,7 +9,7 @@ const initialSearchParams = {
     //     rating: { highToLow: false, lowToHigh: false },
     //     worthwhile: false
     // }
-    sortBy: ""
+    sortBy: "priceLowToHigh"
 }
 
 const getLocalStorageOrSetDefault = () => {
@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
             localStorage.setItem('state', JSON.stringify(newState));
             return newState
         case 'SLIDER_UPDATE':
-            newState = { ...state, searchParams: { ...state.searchParams, fromPrice:action.sliderValue[0],toPrice:action.sliderValue[1]}}//price: { from: action.sliderValue[0], to: action.sliderValue[1] } } }
+            newState = { ...state, searchParams: { ...state.searchParams, fromPrice: action.sliderValue[0], toPrice: action.sliderValue[1] } }//price: { from: action.sliderValue[0], to: action.sliderValue[1] } } }
             localStorage.setItem('state', JSON.stringify(newState));
             return newState
         case 'UPDATE_CONDITIONS':
@@ -63,27 +63,10 @@ export default (state = initialState, action) => {
             newState = { ...state, searchResult: action.searchResult }
             localStorage.setItem('state', JSON.stringify(newState));
             return newState
-        // case 'UPDATE_ADS':
-        //     newState = { ...state, adsPath: action.adsPath }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
-        // case 'UPDATE_MENU':
-        //     newState = { ...state, menuText: action.menuText }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
-        // case 'UPDATE_CAR_SEARCH_PARAMS':
-        //     newState = { ...state, carSearchParams: { ...state.carSearchParams, ...action.carSearchParams } }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
-        // case 'UPDATE_USER':
-        //     newState = { ...state, user: action.user }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
-
-        // case 'SORT_BY':
-        //     newState = { ...state, sortBy: action.sortBy }
-        //     localStorage.setItem('state', JSON.stringify(newState));
-        //     return newState
+        case 'SORT_BY':
+            newState = { ...state, searchParams: { ...state.searchParams, sortBy: action.sortBy } }
+            localStorage.setItem('state', JSON.stringify(newState));
+            return newState
         default:
             return state
     }

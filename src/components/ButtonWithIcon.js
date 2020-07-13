@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { purple, grey } from '@material-ui/core/colors';
-import {  withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { updateSortBy,filterUpdated } from '../actions/actions'
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -23,15 +24,18 @@ const useStyles = makeStyles((theme) => ({
 const IconLabelButtons = (props) => {
     const classes = useStyles();
     return (
-            <ColorButton variant="text" color="primary" className={classes.margin}
-                // variant="contained"
-                // color={props.color}
-                // className={classes.button}
-                endIcon={props.icon ? <props.icon /> : ""}
-            >
-                {props.text}
-                {props.paper ? props.paper : ""}
-            </ColorButton>
+        <ColorButton onClick={() => {
+            props.dispatch(updateSortBy(props.sortType))
+            props.dispatch(filterUpdated(true))
+        }} variant="text" color="primary" className={classes.margin}
+            // variant="contained"
+            // color={props.color}
+            // className={classes.button}
+            endIcon={props.icon ? <props.icon /> : ""}
+        >
+            {props.text}
+            {props.paper ? props.paper : ""}
+        </ColorButton>
     );
 }
 

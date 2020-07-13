@@ -33,9 +33,16 @@ const daysBetween2Dates = (date1, date2) => {
     return Math.round(Math.abs((date1 - date2) / oneDay));
 }
 
+const formatPrice = (n) => {
+    return n.toLocaleString("en-US");
+}
 const PackageSearchResult = (props) => {
-    if (props.filtersUpdated) 
+    if (props.filtersUpdated)
         sendSearchRequest(props, true).then(() => props.dispatch(filterUpdated(false)))
+    if (props.searchParams.sortBy === "worthwhile") {
+        props.searchResult.sort((a, b) => a.avgPrice - b.avgPrice);
+    }
+
 
     return (
         <div className="mainApp-result-wrapper">
@@ -46,9 +53,19 @@ const PackageSearchResult = (props) => {
                 {props.searchResult.map(searchData => {
                     return (
                         <div key={searchData._id} className="mainApp-result-table">
+
                             <div className="mainApp-result-table-leftPart">
-                                <label>asdfsafdsf</label>
+                                <div className="mainApp-result-leftPart-textWrapper">
+                                    <label className="mainApp-result-leftPart-priceText">{formatPrice(searchData.price) + "$"}</label>
+                                    <label className="mainApp-result-leftPart-text">מחיר ממוצע לאדם בחדר זוגי</label>
+                                </div>
+                                {/* <div className="mainApp-result-leftPart-buttonWrapper"> */}
+                                <button className="mainApp-result-table-leftPart-button">
+                                    <label>פרטים נוספים</label>
+                                </button>
+                                {/* </div> */}
                             </div>
+
                             <div className="mainApp-result-table-MainPart">
                                 <label className="mainApp-result-name">{searchData.name}</label>
                                 <Rating defaultValue={searchData.rating} readOnly className="mainApp-result-rating" />
@@ -65,7 +82,7 @@ const PackageSearchResult = (props) => {
                                         {daysBetween2Dates(searchData.dateOut, searchData.dateIn) + " "}
                                     לילות
                                     </label>
-                                    <span class="mainApp-vertical-line"></span>
+                                    <span className="mainApp-vertical-line"></span>
                                     <label className="mainApp-result-conditions">
                                         {searchData.breakfast ? "ארוחת בוקר" : "חדר בלבד"}
                                     </label>
@@ -75,6 +92,7 @@ const PackageSearchResult = (props) => {
                             <div className="mainApp-result-table-rightPart">
                                 < img className="mainApp-result-image" src={searchData.imgsLinks[0]} alt="search-result" />
                             </div>
+
                             {/* onClick={(e) => { onOffResult(e); offNewTab(e) }}
                          onMouseEnter={(e) => onNewTab(e)}
                          onMouseLeave={(e) => offNewTab(e)} */}

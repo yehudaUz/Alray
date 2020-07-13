@@ -154,28 +154,6 @@ module.exports.packageSearch = async (req, res) => {
             ratingArr.push(i + 1)
     mongooseSearchObj.rating = { "$in": ratingArr }
 
-    // if (mongooseSearchObj.fromYear)
-    //     mongooseSearchObj.year = { "$gte": mongooseSearchObj["fromYear"] }
-    // if (mongooseSearchObj.toYear) {
-    //     if (!mongooseSearchObj.year)
-    //         mongooseSearchObj.year = { "$lte": mongooseSearchObj["toYear"] }
-    //     else
-    //         mongooseSearchObj.year = { "$gte": mongooseSearchObj["fromYear"], "$lte": mongooseSearchObj["toYear"] }
-    // }
-    // delete mongooseSearchObj["fromYear"]; delete mongooseSearchObj["toYear"]
-
-    // if (mongooseSearchObj.withPrice && mongooseSearchObj["withPrice"])
-    //     if (!mongooseSearchObj.price)
-    //         mongooseSearchObj.price = { $ne: null }
-
-    // delete mongooseSearchObj["withPrice"];
-
-
-    // if (mongooseSearchObj.withPhoto && mongooseSearchObj["withPhoto"]) {
-    //     mongooseSearchObj["imgsLinks.0"] = { "$exists": true }
-    // }
-    // delete mongooseSearchObj["withPhoto"];
-
     Object.entries(mongooseSearchObj).map(keyValue => {
         if (keyValue[0] && Array.isArray(keyValue[1]) && keyValue[1].length === 0)
             delete mongooseSearchObj[keyValue[0]]
@@ -184,12 +162,9 @@ module.exports.packageSearch = async (req, res) => {
     console.log("Aaa", mongooseSearchObj)
 
 
-    let sortBy = req.body.sortBy ? req.body.sortBy : "priceLowToHigh"
-    if (sortBy && sortBy !== undefined && sortBy !== "" && sortBy != null) {
+    let sortBy = mongooseSearchObj.sortBy ? mongooseSearchObj.sortBy : undefined// "priceLowToHigh"
+    if (sortBy && sortBy !== undefined && sortBy !== "" && sortBy !== null) {
         switch (sortBy) {
-            // case "byDate":
-            //     sortBy = "-updatedAt"
-            //     break;
             case "priceLowToHigh":
                 sortBy = "price"
                 break;
@@ -202,22 +177,18 @@ module.exports.packageSearch = async (req, res) => {
             case "ratingHighToLow":
                 sortBy = "-rating"
                 break;
-            // case "byKmLowToHigh":
-            //     sortBy = "km"
-            //     break;
-            // case "byYearHighToLow":
-            //     sortBy = "-year"
-            //     break;
+            case "worthwhile":
+                sortBy = "avgPrice"
+                break;
             default:
                 console.log("UNKNOWN SORTBY OPTION!!!!!")
         }
     }
+    delete mongooseSearchObj["sortBy"]
+
     console.log("sortBy", sortBy)
     console.log("mongooseSearchObj", mongooseSearchObj)
-    // holidayPack.find({}, (err, record) => {
-    //     console.log("err", err)
-    //     console.log("Records: ", record)
-    // })
+
     holidayPack.find(mongooseSearchObj, function (err, records) {
         if (err)
             return res.status(500).send({ body: "Sorry, internal error when searched for document in database" })

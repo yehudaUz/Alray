@@ -12,6 +12,7 @@ import Select from './Select'
 import PackageSearchResults from './PackageSearchResult'
 const trophyIcon = () => <i className="fa fa-trophy" aria-hidden="true"></i>
 
+
 const MainApp = (props) => {
     return (
         <div className="mainApp-wrapper">
@@ -22,9 +23,9 @@ const MainApp = (props) => {
                     <div className="mainApp-sort">
                         <Select />
                         <span className="mainApp-vertical-line">|</span>
-                        <ButtonWithIcon text="הכי משתלם" icon={CreditCardIcon} sortBy="lowToHigh" />
-                        <ButtonWithIcon text="הכי פופולרי" icon={trophyIcon} />
-                        <ButtonWithIcon text="הכי זול" icon={AttachMoneyIcon} />
+                        <ButtonWithIcon text="הכי משתלם" icon={CreditCardIcon} sortType="worthwhile" />
+                        <ButtonWithIcon text="הכי פופולרי" icon={trophyIcon} sortType="ratingHighToLow" />
+                        <ButtonWithIcon text="הכי זול" icon={AttachMoneyIcon} sortType="priceLowToHigh" />
                     </div>
 
                     <PackageSearchResults />

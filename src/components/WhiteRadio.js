@@ -23,9 +23,9 @@ const WhiteRadio = (props) => {
     const RadioComp = withStyles({
         root: {
             color: "white",
-            '&$checked': {
-                color: "white",
-            },
+            // '&$checked': {
+            //     color: "white",
+            // },
         },
     })((props) => <Radio color="default" {...props} />);
 
