@@ -1,47 +1,42 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import {updateSearchText,filterUpdated} from '../actions/actions'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
-            // margin: theme.spacing(1),
-            // width: '',
-            // backgroundColor:"white"
         },
-        // backgroundColor: "white"
     },
 }));
 
-// export default function BasicTextFields() {
-
-//     return (
-//         <form className={classes.root} noValidate autoComplete="off">
-//             <TextField id="outlined-basic" label="חיפוש לפי שם מלון" variant="outlined" />
-//         </form>
-//     );
-// }
-
-
 const SearchInput = (props) => {
-
+    const handleChange = (e) => {
+        props.dispatch(updateSearchText(e.target.value))
+        props.dispatch(filterUpdated(true))
+    }
+    
     const classes = useStyles();
     return (
         <div className="search-input ">
-                <InputBase 
-                    placeholder="חיפוש לפי שם מלון"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    startAdornment={<SearchIcon />}
-                />
-            {/* </div > */}
+            <InputBase
+                placeholder="חיפוש לפי שם מלון"
+                classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                startAdornment={<SearchIcon />}
+                onChange={handleChange}
+            />
         </div>
     )
 }
 
-export default SearchInput
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(SearchInput);

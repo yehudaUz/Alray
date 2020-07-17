@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { updateSliderValues, filterUpdated } from '../actions/actions'
 
@@ -13,7 +12,6 @@ const useStyles = makeStyles({
 
 const MySlider = withStyles({
     rail: {
-        // height: 2,
         opacity: 1,
         backgroundColor: "white",
     }, thumb: {
@@ -31,32 +29,18 @@ function valuetext(value) {
 
 const PriceSlider = (props) => {
     const classes = useStyles();
-    // const [value, setValue] = React.useState([0, 6000]);
 
     const handleChange = (event, newValue) => {
-        // console.log(newValue)
         props.dispatch(updateSliderValues(newValue))
-        // props.dispatch(filterUpdated(true))
-        // setValue(newValue);
     };
-
-    const updateResult = () => {
+    
+    const updateResult = (e) => {
+        if (e.target.checked === true || e.target.checked === false)
+            e.target.click()
         props.dispatch(filterUpdated(true))
     }
 
-    const minMaxPrice = (isMin) => {
-        if (props && props.searchResult && props.searchResult[0] && props.searchResult[0].price) {
-            let val = props.searchResult[0].price
-            for (let i = 0; i < props.searchResult.length; i++)
-                if ((isMin && props.searchResult[i].price < val) || (!isMin && props.searchResult[i].price > val))
-                    val = props.searchResult[i].price
-            return val
-        } else {
-            if (isMin)
-                return 0
-            return 10000
-        }
-    }
+    document.onmouseup = updateResult
 
     return (
         <div className="priceSlider">
@@ -78,6 +62,7 @@ const PriceSlider = (props) => {
                     aria-labelledby="range-slider"
                     getAriaValueText={valuetext}
                     rail={{ backgroundColor: "white" }}
+                    step={100}
                 />
             </div>
         </div>

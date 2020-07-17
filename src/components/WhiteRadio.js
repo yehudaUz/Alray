@@ -6,8 +6,6 @@ import { updateRatingValue, updateConditions, filterUpdated } from '../actions/a
 
 const WhiteRadio = (props) => {
     const handleChange = (e) => {
-        // console.log(e.target.checked)
-        // console.log(props)
         if (props.radioRating) {
             let newRadioArr = [...props.searchParams.rating]
             newRadioArr[props.radioRating] = !newRadioArr[props.radioRating]
@@ -23,9 +21,6 @@ const WhiteRadio = (props) => {
     const RadioComp = withStyles({
         root: {
             color: "white",
-            // '&$checked': {
-            //     color: "white",
-            // },
         },
     })((props) => <Radio color="default" {...props} />);
 

@@ -8,6 +8,7 @@ import '../style/searchInput.css'
 import '../style/buttonWithIcon.css'
 import '../style/paper.css'
 import '../style/select.css'
+import '../style/footer.css'
 
 import React from 'react'
 import { Provider } from 'react-redux'

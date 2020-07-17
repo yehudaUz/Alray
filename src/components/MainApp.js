@@ -13,39 +13,37 @@ import PackageSearchResults from './PackageSearchResult'
 const trophyIcon = () => <i className="fa fa-trophy" aria-hidden="true"></i>
 
 
-const MainApp = (props) => {
-    return (
-        <div className="mainApp-wrapper">
-            <div className="mainApp-centerize-wrapper">
+const MainApp = (props) => (
+    <div className="mainApp-wrapper">
+        <div className="mainApp-centerize-wrapper">
 
-                <div className="mainApp-sortAndResult">
+            <div className="mainApp-sortAndResult">
 
-                    <div className="mainApp-sort">
-                        <Select />
-                        <span className="mainApp-vertical-line">|</span>
-                        <ButtonWithIcon text="הכי משתלם" icon={CreditCardIcon} sortType="worthwhile" />
-                        <ButtonWithIcon text="הכי פופולרי" icon={trophyIcon} sortType="ratingHighToLow" />
-                        <ButtonWithIcon text="הכי זול" icon={AttachMoneyIcon} sortType="priceLowToHigh" />
-                    </div>
-
-                    <PackageSearchResults />
-
+                <div className="mainApp-sort">
+                    <Select />
+                    <span className="mainApp-vertical-line">|</span>
+                    <ButtonWithIcon text="הכי משתלם" icon={CreditCardIcon} sortType="worthwhile" />
+                    <ButtonWithIcon text="הכי פופולרי" icon={trophyIcon} sortType="ratingHighToLow" />
+                    <ButtonWithIcon text="הכי זול" icon={AttachMoneyIcon} sortType="priceLowToHigh" />
                 </div>
 
-                <div className="mainApp-filter-wrapper">
-                    <div className="mainApp-filter-header">
-                        <label>סינון תוצאות</label>
-                    </div>
-                    <RatingFilter />
-                    <PriceSlider />
-                    <HostingBase />
-                    <SearchInput />
-                </div>
+                <PackageSearchResults />
 
             </div>
+
+            <div className="mainApp-filter-wrapper">
+                <div className="mainApp-filter-header">
+                    <label>סינון תוצאות</label>
+                </div>
+                <RatingFilter />
+                <PriceSlider />
+                <HostingBase />
+                <SearchInput />
+            </div>
+
         </div>
-    )
-}
+    </div>
+)
 
 const mapStateToProps = (state) => {
     return state

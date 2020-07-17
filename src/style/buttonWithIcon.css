@@ -3,6 +3,15 @@
     color: darkslategrey;
     font-size: 1rem;
 }
+
 .MuiButton-label:hover {
     color: white;
+}
+
+
+.clicked {
+    background-color: #313685!important;
+}
+.clicked span {
+    color: white!important;
 }

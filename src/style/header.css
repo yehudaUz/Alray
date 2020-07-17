@@ -1,4 +1,5 @@
 /**** header ****/
+
 .header-wrapper {
     background: #000018;
     /* padding: 0 1rem; */
@@ -43,6 +44,7 @@
     border-radius: 5px;
     text-align: center;
 }
+
 .header-field:hover {
     background: #eee;
     color: #313685;
@@ -58,6 +60,13 @@
 }
 
 .header-wrapper a {
-    color: inherit; 
-    text-decoration: inherit; 
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.header-menu-button {
+    display: flex;
+    align-items: center;
+    font-size: 4rem;
+    margin-right: 50px;
 }

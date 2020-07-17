@@ -148,6 +148,12 @@ module.exports.packageSearch = async (req, res) => {
     }
     delete mongooseSearchObj["conditions"]
 
+    if (mongooseSearchObj.byText) {
+        let regex = new RegExp( mongooseSearchObj.byText)
+        mongooseSearchObj.name =  regex 
+        delete mongooseSearchObj["byText"]
+    }
+
     let ratingArr = []
     for (let i = 0; i < mongooseSearchObj.rating.length; i++)
         if (mongooseSearchObj.rating[i])

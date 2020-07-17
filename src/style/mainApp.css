@@ -1,6 +1,7 @@
 .mainApp-wrapper {
     display: flex;
     flex-direction: column;
+    margin-bottom: 3rem;
 }
 
 .mainApp-centerize-wrapper {
@@ -37,7 +38,6 @@
 }
 
 .mainApp-result {
-    margin-top: 2rem;
     display: flex;
     /* justify-content: flex-end; */
     flex-direction: column;
@@ -72,6 +72,7 @@
 
 .mainApp-result-wrapper {
     color: black;
+    margin-top: 3rem;
 }
 
 .mainApp-result-table {

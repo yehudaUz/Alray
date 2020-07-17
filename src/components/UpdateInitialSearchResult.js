@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { updateCarSearchParams } from '../actions/actions'
 
-
 const UpdateInitialSearchResult = async (props) => {
     fetch('http://localhost:3000/carSearchInitial', {
         method: 'POST',
@@ -10,7 +9,6 @@ const UpdateInitialSearchResult = async (props) => {
         props.dispatch(updateCarSearchParams())
         return (data.body)
     }
-        // response.json().then((result) => this.setState({ results: results }))
     ).catch(error => console.log("ERROR: " + error)) // Handle the error response object)
 }
 
@@ -18,4 +16,3 @@ const mapStateToProps = (state) => {
     return state
 };
 export default connect(mapStateToProps)(UpdateInitialSearchResult);
-// export default UpdateInitialSearchResult;

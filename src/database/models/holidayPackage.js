@@ -21,11 +21,6 @@ const packageSchema = new mongoose.Schema({
         max: 5,
         required: true
     },
-    area: {
-        type: String,
-        // required: true,
-        trim: true
-    },
     dateIn: {
         type: String,
         required: true
@@ -52,10 +47,7 @@ const packageSchema = new mongoose.Schema({
     avgPrice: {
         type: Number,
         default: function () {
-            // if (this.exitDate && this.enterDate)
-            // console.log("aaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqqq", this.dateIn)
             return this.price / (daysBetween2Dates(this.dateOut, this.dateIn))
-            // return 0
         }
     },
     userId: {
@@ -64,14 +56,6 @@ const packageSchema = new mongoose.Schema({
 }, { timestamps: true },
     { "versionKey": false }
 )
-
-// var Original = mongoose.model('Original', OriginalSchema);
-// var NewSch = Original.discriminator('NewSch', NewSchema);
-
-// const tempCarAdvertisement = mongoose.model('tempCarAdvertisement', carAdvertisementSchema)
-// const CarAdvertisement = tempCarAdvertisement.discriminator("CarAdvertisemen", advertisementSchema)
-// console.log("FFFFFFFFFFFFFFFFFFFFF",Advertisement.discriminator)
-// const CarAdvertisement = Advertisement.discriminator("CarAdvertisement", carAdvertisementSchema)
 
 const Package = mongoose.model('package', packageSchema)
 

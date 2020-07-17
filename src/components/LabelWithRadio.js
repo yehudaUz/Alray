@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 import Radio from '@material-ui/core/Radio';
 import { withStyles } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
 
 const GreyRadio = withStyles({
     root: {

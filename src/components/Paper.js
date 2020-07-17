@@ -26,12 +26,10 @@ const simpleList = () => (
 
 export default function SimplePaper(props) {
     const classes = useStyles();
-
     return (
         <div className={classes.root + " paper"}>
             <Paper elevation={3} children={simpleList()}> 
-            {/* props.paperChilds ? props.paperChilds() : ""} > */}
-                {/* {simpleList()}   */}
+
             </Paper>
         </div>
     );

@@ -28,3 +28,8 @@ export const filterUpdated = (isFilterUpdate) => ({
     type: "FILTER_UPDATE",
     isFilterUpdate
 })
+
+export const updateSearchText = (text) => ({
+    type:"SEARCH_TEXT_UPDATE",
+    text
+})

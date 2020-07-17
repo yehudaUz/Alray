@@ -17,7 +17,6 @@ const ColorButton = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
     margin: {
-        // margin: theme.spacing(4),
     },
 }));
 
@@ -27,10 +26,7 @@ const IconLabelButtons = (props) => {
         <ColorButton onClick={() => {
             props.dispatch(updateSortBy(props.sortType))
             props.dispatch(filterUpdated(true))
-        }} variant="text" color="primary" className={classes.margin}
-            // variant="contained"
-            // color={props.color}
-            // className={classes.button}
+        }} variant="text" color="primary" className={classes.margin + " " + props.sortType}
             endIcon={props.icon ? <props.icon /> : ""}
         >
             {props.text}

@@ -39,8 +39,18 @@ const formatPrice = (n) => {
 const PackageSearchResult = (props) => {
     if (props.filtersUpdated)
         sendSearchRequest(props, true).then(() => props.dispatch(filterUpdated(false)))
-    if (props.searchParams.sortBy === "worthwhile") {
+    const sortBy = props.searchParams.sortBy
+    if (sortBy === "worthwhile")
         props.searchResult.sort((a, b) => a.avgPrice - b.avgPrice);
+    // if (props.searchParams.byText !== ""){
+    //     props.searchResult = props.searchResult.filter((result) => result.name.includes(props.searchParams.byText))
+    // }
+    let allClicked = document.getElementsByClassName("clicked")
+    if (allClicked.length > 0)
+        [...allClicked].forEach(button => button.classList.remove("clicked"))
+    if (sortBy === "worthwhile" || sortBy === "priceLowToHigh" || sortBy === "ratingHighToLow") {
+        if (document.getElementsByClassName(sortBy).length > 0)
+            document.getElementsByClassName(sortBy)[0].classList.add("clicked")
     }
 
 
@@ -59,11 +69,9 @@ const PackageSearchResult = (props) => {
                                     <label className="mainApp-result-leftPart-priceText">{formatPrice(searchData.price) + "$"}</label>
                                     <label className="mainApp-result-leftPart-text">מחיר ממוצע לאדם בחדר זוגי</label>
                                 </div>
-                                {/* <div className="mainApp-result-leftPart-buttonWrapper"> */}
                                 <button className="mainApp-result-table-leftPart-button">
                                     <label>פרטים נוספים</label>
                                 </button>
-                                {/* </div> */}
                             </div>
 
                             <div className="mainApp-result-table-MainPart">
@@ -92,10 +100,6 @@ const PackageSearchResult = (props) => {
                             <div className="mainApp-result-table-rightPart">
                                 < img className="mainApp-result-image" src={searchData.imgsLinks[0]} alt="search-result" />
                             </div>
-
-                            {/* onClick={(e) => { onOffResult(e); offNewTab(e) }}
-                         onMouseEnter={(e) => onNewTab(e)}
-                         onMouseLeave={(e) => offNewTab(e)} */}
 
                         </div>
                     )
