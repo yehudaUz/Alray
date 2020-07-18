@@ -1,3 +1,105 @@
+@media only screen and (max-width: 1200px) {
+    /* .mainApp-centerize-wrapper {
+        flex-direction: column-reverse!important;
+    } */
+    /* .mainApp-filter-wrapper {
+        width: 100%!important;
+    } */
+}
+
+@media only screen and (max-width: 950px) {
+    /* .mainApp-centerize-wrapper {
+        display: unset!important;
+    } */
+}
+
+@media only screen and (max-width: 880px) {
+    .MuiButton-textPrimary {
+        line-height: unset!important;
+    }
+    .MuiButton-label {
+        padding: 0px!important;
+    }
+    .mainApp-centerize-wrapper {
+        flex-direction: column-reverse!important;
+    }
+    .mainApp-filter-wrapper {
+        margin-bottom: 2rem!important;
+        width: 100%!important;
+    }
+    .search-input {
+        width: 90%!important;
+    }
+    .search-input-mui {
+        width: 100%!important;
+    }
+    .search-input-mui .MuiInputBase-input {
+        text-align: right;
+        margin-right: 20px;
+    }
+    .search-input-mui .MuiSvgIcon-root {
+        margin-left: 20px;
+    }
+    .ratingFilter-wrapper .MuiTypography-body1 {
+        width: 100%!important;
+    }
+    .ratingFilter-wrapper .MuiRating-readOnly {
+        display: flex!important;
+        flex-direction: row!important;
+        justify-content: space-evenly!important;
+    }
+    .select {
+        justify-content: center!important;
+    }
+    .select .makeStyles-formControl-1 {
+        width: 80%!important;
+    }
+    .mainApp-sort {
+        display: unset!important;
+    }
+    .mainApp-vertical-line {
+        display: none!important;
+    }
+    .mainApp-result-leftPart-priceText {
+        font-size: 1rem!important;
+    }
+    .mainApp-sort-buttons {
+        justify-content: center!important;
+        display: flex!important;
+    }
+    .mainApp-sort-buttons button {
+        width:30%!important;
+        padding:0.5rem!important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    /* .select {
+        justify-content: center!important;
+    }
+    .select .makeStyles-formControl-1 {
+        width: 80%!important;
+    }
+    .mainApp-sort {
+        display: unset!important;
+    }
+    .mainApp-vertical-line {
+        display: none!important;
+    }
+    .mainApp-result-leftPart-priceText {
+        font-size: 1rem!important;
+    } */
+}
+
+@media only screen and (max-width: 400px) {
+    .mainApp-result-leftPart-priceText {
+        font-size: 0.75rem!important;
+    }
+    .mainApp-result-table-leftPart-button {
+        font-size: 0.5em;
+    }
+}
+
 .mainApp-wrapper {
     display: flex;
     flex-direction: column;
@@ -52,7 +154,7 @@
 
 .mainApp-sortAndResult {
     padding: 0 1rem 1rem 1rem;
-    width: 75%;
+    /* width: 75%; */
 }
 
 .ratingFilter-wrapper {
@@ -167,6 +269,6 @@
     display: block;
 }
 
-.mainApp-result-leftPart-text{
+.mainApp-result-leftPart-text {
     font-size: 0.75em;
 }

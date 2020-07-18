@@ -6,7 +6,7 @@ import { updateSliderValues, filterUpdated } from '../actions/actions'
 
 const useStyles = makeStyles({
     root: {
-        width: 200,
+        width: "100%",
     },
 });
 

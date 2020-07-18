@@ -21,7 +21,7 @@ const SearchInput = (props) => {
     const classes = useStyles();
     return (
         <div className="search-input ">
-            <InputBase
+            <InputBase className="search-input-mui"
                 placeholder="חיפוש לפי שם מלון"
                 classes={{
                     root: classes.inputRoot,
