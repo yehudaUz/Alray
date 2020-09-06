@@ -1,0 +1,10 @@
+body {
+    font-family: "Rubik", sans-serif;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    margin: 0px;
+}
+
+video {
+    width: 100%;
+}
