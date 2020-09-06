@@ -6,9 +6,9 @@ import { Rating } from '@material-ui/lab';
 
 const sendSearchRequest = async (props, isSearchWithParams) => {
     return new Promise((resolve, reject) => {
-        let urlPath = "http://localhost:3000/packageSearchInitial"
+        let urlPath = "/packageSearchInitial"
         if (isSearchWithParams)
-            urlPath = "http://localhost:3000/packageSearch"
+            urlPath = "/packageSearch"
         fetch(urlPath, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

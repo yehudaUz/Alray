@@ -33,10 +33,15 @@
     "validator": "^13.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && (cd src/server && yarn install)",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start2": "npm-run-all --parallel start-server",
+    "start3": "node index.js",
+    "start":"cd src/server && yarn start",
+    "heroku-postbuild": "yarn build",
+    "start-server": "cd src/server && yarn start",
+    "start-client": "react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"

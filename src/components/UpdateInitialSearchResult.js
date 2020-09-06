@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { updateCarSearchParams } from '../actions/actions'
 
 const UpdateInitialSearchResult = async (props) => {
-    fetch('http://localhost:3000/carSearchInitial', {
+    fetch('/carSearchInitial', {
         method: 'POST',
     }).then(response => response.json()).then(data => {
         console.log(data)
