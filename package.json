@@ -12,6 +12,7 @@
     "aws-sdk": "^2.698.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
     "express": "^4.17.1",
@@ -37,7 +38,7 @@
     "eject": "react-scripts eject",
     "start2": "npm-run-all --parallel start-server",
     "start3": "node index.js",
-    "start":"cd src/server && yarn start",
+    "start": "cd src/server && yarn start",
     "heroku-postbuild": "yarn build",
     "start-server": "cd src/server && yarn start",
     "start-client": "react-scripts start"
