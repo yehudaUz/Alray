@@ -3,6 +3,8 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+const cors = require('cors')
+app.use(cors())
 
 require('../database/mongoose')
 const userRouter = require('../database/models/user')

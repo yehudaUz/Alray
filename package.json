@@ -2,7 +2,6 @@
   "name": "react-new-features",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -42,9 +41,6 @@
     "heroku-postbuild": "yarn build",
     "start-server": "cd src/server && yarn start",
     "start-client": "react-scripts start"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
